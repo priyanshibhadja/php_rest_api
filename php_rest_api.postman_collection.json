@@ -1,0 +1,314 @@
+{
+	"info": {
+		"_postman_id": "506f67f6-d0c4-49ca-9ba7-646a2a87d3f8",
+		"name": "php_rest_api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33215572"
+	},
+	"item": [
+		{
+			"name": "http://localhost/php_rest_api/crud.php",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/php_rest_api/crud.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"php_rest_api",
+						"crud.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost/php_rest_api/crud.php",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "sname",
+							"value": "marvin",
+							"type": "text"
+						},
+						{
+							"key": "sage",
+							"value": "20",
+							"type": "text"
+						},
+						{
+							"key": "scity",
+							"value": "rajkot",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/php_rest_api/crud.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"php_rest_api",
+						"crud.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost/php_rest_api/crud.php",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"sid\":27,\r\n    \"sname\":\"ishani\",\r\n    \"sage\":21,\r\n    \"scity\":\"vadodara\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/php_rest_api/crud.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"php_rest_api",
+						"crud.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost/php_rest_api/crud.php",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"sid\":24\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/php_rest_api/crud.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"php_rest_api",
+						"crud.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost/php_rest_api/innerjoin.php",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/php_rest_api/innerjoin.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"php_rest_api",
+						"innerjoin.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost/php_rest_api/leftjoin.php",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/php_rest_api/leftjoin.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"php_rest_api",
+						"leftjoin.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost/php_rest_api/rightjoin.php",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/php_rest_api/rightjoin.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"php_rest_api",
+						"rightjoin.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost/php_rest_api/fullouterjoin.php",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/php_rest_api/fullouterjoin.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"php_rest_api",
+						"fullouterjoin.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost/php_rest_api/null_operation.php?sid=4",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/php_rest_api/null_operation.php?sid=4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"php_rest_api",
+						"null_operation.php"
+					],
+					"query": [
+						{
+							"key": "sid",
+							"value": "4"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost/php_rest_api/null_operation.php",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"sid\":4,\r\n    \"column_names\":\"last_name\",\r\n    \"new_values\":\"patel\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/php_rest_api/null_operation.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"php_rest_api",
+						"null_operation.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost/php_rest_api/image_upload.php",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/ABCD/Pictures/Screenshots/Screenshot (301).png"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/php_rest_api/image_upload.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"php_rest_api",
+						"image_upload.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost/php_rest_api/findparticular_record.php?first_letter=p",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://localhost/php_rest_api/findparticular_record.php?first_letter=p",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"php_rest_api",
+						"findparticular_record.php"
+					],
+					"query": [
+						{
+							"key": "first_letter",
+							"value": "p"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
