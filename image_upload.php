@@ -7,31 +7,31 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Check if file is uploaded successfully
     if (isset($_FILES["file"]) && $_FILES["file"]["error"] === UPLOAD_ERR_OK) {
         // Get the uploaded file name
-        $imageName = $_FILES["file"]["name"];
+        $image_name = $_FILES["file"]["name"];
 
         // Check if the image name already exists in the database
-        $checkStmt = $conn->prepare("SELECT id FROM users WHERE name = ?");
-        $checkStmt->bind_param("s", $imageName);
-        $checkStmt->execute();
-        $checkStmt->store_result();
+        $check_stmt = $conn->prepare("SELECT id FROM users WHERE name = ?");
+        $check_stmt->bind_param("s", $imageName);
+        $check_stmt->execute();
+        $check_stmt->store_result();
 
-        if ($checkStmt->num_rows > 0) {
+        if ($check_stmt->num_rows > 0) {
             // Image name already exists in the database
             echo json_encode(["success" => false, "error" => "Image name already exists"]);
         } else {
             // Store the image name in the database
-            $insertStmt = $conn->prepare("INSERT INTO users (name) VALUES (?)");
-            $insertStmt->bind_param("s", $imageName);
-            $insertStmt->execute();
+            $insert_stmt = $conn->prepare("INSERT INTO users (name) VALUES (?)");
+            $insert_stmt->bind_param("s", $imageName);
+            $insert_stmt->execute();
 
             // Move uploaded file to local folder
-            $uploadDir = "uploads/";
-            $uploadPath = $uploadDir . basename($imageName);
-            move_uploaded_file($_FILES["file"]["tmp_name"], $uploadPath);
+            $upload_dir = "uploads/";
+            $upload_path = $upload_dir . basename($image_name);
+            move_uploaded_file($_FILES["file"]["tmp_name"], $upload_path);
 
             // Close statements
-            $insertStmt->close();
-            $checkStmt->close();
+            $insert_stmt->close();
+            $check_stmt->close();
             $conn->close();
 
             echo json_encode(["success" => true, "message" => "Successfully uploaded"]);
