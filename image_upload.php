@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         // Check if the image name already exists in the database
         $check_stmt = $conn->prepare("SELECT id FROM users WHERE name = ?");
-        $check_stmt->bind_param("s", $imageName);
+        $check_stmt->bind_param("s", $image_name);
         $check_stmt->execute();
         $check_stmt->store_result();
 
@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         } else {
             // Store the image name in the database
             $insert_stmt = $conn->prepare("INSERT INTO users (name) VALUES (?)");
-            $insert_stmt->bind_param("s", $imageName);
+            $insert_stmt->bind_param("s", $image_name);
             $insert_stmt->execute();
 
             // Move uploaded file to local folder
