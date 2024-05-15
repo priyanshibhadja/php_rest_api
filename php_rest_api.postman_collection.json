@@ -8,6 +8,75 @@
 	"item": [
 		{
 			"name": "http://localhost/php_rest_api/crud.php",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.sendRequest({\r",
+							"    url: 'http://localhost/php_rest_api/crud.php?sid=1', // Replace 'your_endpoint_url' with your actual endpoint URL\r",
+							"    method: 'GET',\r",
+							"}, function (err, response) {\r",
+							"    if (err) {\r",
+							"        console.error(err);\r",
+							"    } else {\r",
+							"        console.log(response.json());\r",
+							"    }\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const Ajv = require('ajv');\r",
+							"const ajv = new Ajv();\r",
+							"\r",
+							"const schema = {\r",
+							"    \"type\": \"object\",\r",
+							"    \"properties\": {\r",
+							"        \"message\": {\r",
+							"            \"type\": \"string\"\r",
+							"        },\r",
+							"        \"status\": {\r",
+							"            \"type\": \"boolean\"\r",
+							"        }\r",
+							"    },\r",
+							"    \"required\": [\"message\", \"status\"]\r",
+							"};\r",
+							"\r",
+							"const validate = ajv.compile(schema);\r",
+							"const isValid = validate(pm.response.json());\r",
+							"\r",
+							"pm.test('Response Body Validation', function () {\r",
+							"    pm.expect(isValid).to.be.true;\r",
+							"    if (!isValid) {\r",
+							"        pm.expect.fail('Response body validation failed');\r",
+							"    }\r",
+							"});\r",
+							"\r",
+							"pm.test('Status code is 200', function () {\r",
+							"    pm.expect(pm.response.code).to.equal(200);\r",
+							"});\r",
+							"\r",
+							"pm.test('Message is not empty', function () {\r",
+							"    const message = pm.response.json().message;\r",
+							"    pm.expect(message).to.not.be.empty;\r",
+							"});\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -27,6 +96,83 @@
 		},
 		{
 			"name": "http://localhost/php_rest_api/crud.php",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.sendRequest({\r",
+							"    url: 'http://localhost/php_rest_api/crud.php', // Replace 'your_endpoint_url' with your actual endpoint URL\r",
+							"    method: 'POST',\r",
+							"    header: {\r",
+							"        'Content-Type': 'application/json'\r",
+							"    },\r",
+							"    body: {\r",
+							"        mode: 'formdata',\r",
+							"        formdata: [\r",
+							"            { key: 'sname', value: 'John Doe' }, // Replace 'John Doe' with the actual name value\r",
+							"            { key: 'sage', value: 25 }, // Replace 25 with the actual age value\r",
+							"            { key: 'scity', value: 'New York' } // Replace 'New York' with the actual city value\r",
+							"        ]\r",
+							"    }\r",
+							"}, function (err, response) {\r",
+							"    if (err) {\r",
+							"        console.error(err);\r",
+							"    } else {\r",
+							"        console.log(response.json());\r",
+							"    }\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const Ajv = require('ajv');\r",
+							"const ajv = new Ajv();\r",
+							"\r",
+							"const schema = {\r",
+							"    \"type\": \"object\",\r",
+							"    \"properties\": {\r",
+							"        \"message\": {\r",
+							"            \"type\": \"string\"\r",
+							"        },\r",
+							"        \"status\": {\r",
+							"            \"type\": \"boolean\"\r",
+							"        }\r",
+							"    },\r",
+							"    \"required\": [\"message\", \"status\"]\r",
+							"};\r",
+							"\r",
+							"const validate = ajv.compile(schema);\r",
+							"const isValid = validate(pm.response.json());\r",
+							"\r",
+							"pm.test('Response Body Validation', function () {\r",
+							"    pm.expect(isValid).to.be.true;\r",
+							"    if (!isValid) {\r",
+							"        pm.expect.fail('Response body validation failed');\r",
+							"    }\r",
+							"});\r",
+							"\r",
+							"pm.test('Status code is 200', function () {\r",
+							"    pm.expect(pm.response.code).to.equal(200);\r",
+							"});\r",
+							"\r",
+							"pm.test('Message is not empty', function () {\r",
+							"    const message = pm.response.json().message;\r",
+							"    pm.expect(message).to.not.be.empty;\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -66,6 +212,70 @@
 		},
 		{
 			"name": "http://localhost/php_rest_api/crud.php",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.sendRequest({\r",
+							"    url: 'your_endpoint_url', // Replace 'your_endpoint_url' with your actual endpoint URL\r",
+							"    method: 'PUT',\r",
+							"    header: {\r",
+							"        'Content-Type': 'application/json'\r",
+							"    },\r",
+							"    body: {\r",
+							"        mode: 'raw',\r",
+							"        raw: JSON.stringify({\r",
+							"            \"sid\": 1, // Replace 1 with the actual student ID\r",
+							"            \"sname\": \"John Doe\", // Replace 'John Doe' with the actual name value\r",
+							"            \"sage\": 25, // Replace 25 with the actual age value\r",
+							"            \"scity\": \"New York\" // Replace 'New York' with the actual city value\r",
+							"        })\r",
+							"    }\r",
+							"}, function (err, response) {\r",
+							"    if (err) {\r",
+							"        console.error(err);\r",
+							"    } else {\r",
+							"        console.log(response.json());\r",
+							"    }\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const response = pm.response.json();\r",
+							"\r",
+							"pm.test('Response Status Check', function () {\r",
+							"    pm.expect(response.status).to.eql(true); // Assuming 'status' key indicates success\r",
+							"});\r",
+							"\r",
+							"pm.test('Response Message Check', function () {\r",
+							"    pm.expect(response.message).to.eql('Student record updated.'); // Adjust based on your response structure\r",
+							"});\r",
+							"\r",
+							"pm.test('Response Body Validation', function () {\r",
+							"    pm.expect(response).to.have.property('message');\r",
+							"    pm.expect(response).to.have.property('status');\r",
+							"    pm.expect(response.message).to.be.a('string');\r",
+							"    pm.expect(response.status).to.be.a('boolean');\r",
+							"});\r",
+							"\r",
+							"pm.test('Status Code is 200', function () {\r",
+							"    pm.expect(pm.response.code).to.equal(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "PUT",
 				"header": [],
@@ -94,6 +304,66 @@
 		},
 		{
 			"name": "http://localhost/php_rest_api/crud.php",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.sendRequest({\r",
+							"    url: 'http://localhost/php_rest_api/crud.php', // Replace 'your_endpoint_url' with your actual endpoint URL\r",
+							"    method: 'DELETE',\r",
+							"    header: {\r",
+							"        'Content-Type': 'application/json'\r",
+							"    },\r",
+							"    body: {\r",
+							"        mode: 'raw',\r",
+							"        raw: JSON.stringify({\r",
+							"            \"sid\": 1 // Replace 1 with the actual student ID to be deleted\r",
+							"        })\r",
+							"    }\r",
+							"}, function (err, response) {\r",
+							"    if (err) {\r",
+							"        console.error(err);\r",
+							"    } else {\r",
+							"        console.log(response.json());\r",
+							"    }\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const response = pm.response.json();\r",
+							"\r",
+							"pm.test('Response Body Validation', function () {\r",
+							"    pm.expect(response).to.be.an('object');\r",
+							"    pm.expect(response).to.have.property('message').that.is.a('string');\r",
+							"    pm.expect(response).to.have.property('status').that.is.a('boolean');\r",
+							"});\r",
+							"\r",
+							"pm.test('Response Status Check', function () {\r",
+							"    pm.expect(response.status).to.eql(false); // Updated to expect false for non-existent student ID\r",
+							"});\r",
+							"\r",
+							"pm.test('Response Message Check', function () {\r",
+							"    pm.expect(response.message).to.eql('Student ID does not exist.'); // Updated to expect message for non-existent student ID\r",
+							"});\r",
+							"\r",
+							"pm.test('Status Code is 200', function () {\r",
+							"    pm.expect(pm.response.code).to.equal(200); // This should be fixed now\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "DELETE",
 				"header": [],
@@ -122,6 +392,58 @@
 		},
 		{
 			"name": "http://localhost/php_rest_api/innerjoin.php",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.sendRequest({\r",
+							"    url: 'http://localhost/php_rest_api/innerjoin.php',\r",
+							"    method: 'GET',\r",
+							"}, function (err, response) {\r",
+							"    if (err) {\r",
+							"        console.error(err);\r",
+							"    } else {\r",
+							"        console.log(response.json());\r",
+							"    }\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const response = pm.response.json();\r",
+							"\r",
+							"pm.test('Response Body Validation', function () {\r",
+							"    pm.expect(response).to.be.an('object');\r",
+							"    pm.expect(response).to.have.property('message').that.is.a('string');\r",
+							"    pm.expect(response).to.have.property('status').that.is.a('boolean');\r",
+							"    pm.expect(response).to.have.property('data').that.is.an('array');\r",
+							"});\r",
+							"\r",
+							"pm.test('Status Code is 200', function () {\r",
+							"    pm.expect(pm.response.code).to.equal(200);\r",
+							"});\r",
+							"\r",
+							"pm.test('Records Found Check', function () {\r",
+							"    if (response.status === true) {\r",
+							"        pm.expect(response.data).to.be.an('array').and.not.empty;\r",
+							"    } else {\r",
+							"        pm.expect(response.data).to.be.an('array').and.empty;\r",
+							"    }\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -141,6 +463,58 @@
 		},
 		{
 			"name": "http://localhost/php_rest_api/leftjoin.php",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.sendRequest({\r",
+							"    url: 'http://localhost/php_rest_api/leftjoin.php',\r",
+							"    method: 'GET',\r",
+							"}, function (err, response) {\r",
+							"    if (err) {\r",
+							"        console.error(err);\r",
+							"    } else {\r",
+							"        console.log(response.json());\r",
+							"    }\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const response = pm.response.json();\r",
+							"\r",
+							"pm.test('Response Body Validation', function () {\r",
+							"    pm.expect(response).to.be.an('object');\r",
+							"    pm.expect(response).to.have.property('message').that.is.a('string');\r",
+							"    pm.expect(response).to.have.property('status').that.is.a('boolean');\r",
+							"    pm.expect(response).to.have.property('data').that.is.an('array');\r",
+							"});\r",
+							"\r",
+							"pm.test('Status Code is 200', function () {\r",
+							"    pm.expect(pm.response.code).to.equal(200);\r",
+							"});\r",
+							"\r",
+							"pm.test('Records Found Check', function () {\r",
+							"    if (response.status === true) {\r",
+							"        pm.expect(response.data).to.be.an('array').and.not.empty;\r",
+							"    } else {\r",
+							"        pm.expect(response.data).to.be.an('array').and.empty;\r",
+							"    }\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -160,6 +534,58 @@
 		},
 		{
 			"name": "http://localhost/php_rest_api/rightjoin.php",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.sendRequest({\r",
+							"    url: 'http://localhost/php_rest_api/rightjoin.php',\r",
+							"    method: 'GET',\r",
+							"}, function (err, response) {\r",
+							"    if (err) {\r",
+							"        console.error(err);\r",
+							"    } else {\r",
+							"        console.log(response.json());\r",
+							"    }\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const response = pm.response.json();\r",
+							"\r",
+							"pm.test('Response Body Validation', function () {\r",
+							"    pm.expect(response).to.be.an('object');\r",
+							"    pm.expect(response).to.have.property('message').that.is.a('string');\r",
+							"    pm.expect(response).to.have.property('status').that.is.a('boolean');\r",
+							"    pm.expect(response).to.have.property('data').that.is.an('array');\r",
+							"});\r",
+							"\r",
+							"pm.test('Status Code is 200', function () {\r",
+							"    pm.expect(pm.response.code).to.equal(200);\r",
+							"});\r",
+							"\r",
+							"pm.test('Records Found Check', function () {\r",
+							"    if (response.status === true) {\r",
+							"        pm.expect(response.data).to.be.an('array').and.not.empty;\r",
+							"    } else {\r",
+							"        pm.expect(response.data).to.be.an('array').and.empty;\r",
+							"    }\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -179,6 +605,57 @@
 		},
 		{
 			"name": "http://localhost/php_rest_api/fullouterjoin.php",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.sendRequest({\r",
+							"    url: 'http://localhost/php_rest_api/rightjoin.php',\r",
+							"    method: 'GET',\r",
+							"}, function (err, response) {\r",
+							"    if (err) {\r",
+							"        console.error(err);\r",
+							"    } else {\r",
+							"        console.log(response.json());\r",
+							"    }\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const response = pm.response.json();\r",
+							"\r",
+							"pm.test('Response Body Validation', function () {\r",
+							"    pm.expect(response).to.be.an('object');\r",
+							"    pm.expect(response).to.have.property('message').that.is.a('string');\r",
+							"    pm.expect(response).to.have.property('status').that.is.a('boolean');\r",
+							"    pm.expect(response).to.have.property('data').that.is.an('array');\r",
+							"});\r",
+							"\r",
+							"pm.test('Status Code is 200', function () {\r",
+							"    pm.expect(pm.response.code).to.equal(200);\r",
+							"});\r",
+							"\r",
+							"pm.test('Records Found Check', function () {\r",
+							"    if (response.status === true) {\r",
+							"        pm.expect(response.data).to.be.an('array').and.not.empty;\r",
+							"    } else {\r",
+							"        pm.expect(response.data).to.be.an('array').and.empty;\r",
+							"    }\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -198,6 +675,77 @@
 		},
 		{
 			"name": "http://localhost/php_rest_api/null_operation.php?sid=4",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.sendRequest({\r",
+							"    url: 'http://localhost/php_rest_api/null_operation.php?sid=4', // Replace 'your_endpoint_url' with your actual endpoint URL\r",
+							"    method: 'GET',\r",
+							"}, function (err, response) {\r",
+							"    if (err) {\r",
+							"        console.error(err);\r",
+							"    } else {\r",
+							"        console.log(response.json());\r",
+							"    }\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const response = pm.response.json();\r",
+							"\r",
+							"pm.test('Response Body Validation', function () {\r",
+							"    pm.expect(response).to.be.an('object');\r",
+							"    pm.expect(response).to.have.property('message').that.is.a('string');\r",
+							"    pm.expect(response).to.have.property('status').that.is.a('boolean');\r",
+							"    // Check if 'data' property exists before further assertions\r",
+							"    if ('data' in response) {\r",
+							"        pm.expect(response.data).to.be.an('array');\r",
+							"    }\r",
+							"});\r",
+							"\r",
+							"pm.test('Status Code is 200', function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test('Missing Columns Check', function () {\r",
+							"    // Check if 'status' property exists before further assertions\r",
+							"    if ('status' in response) {\r",
+							"        if (response.status === true) {\r",
+							"            // Check if 'data' property exists before asserting its type and emptiness\r",
+							"            if ('data' in response) {\r",
+							"                pm.expect(response.data).to.be.an('array').and.not.empty;\r",
+							"            } else {\r",
+							"                pm.expect.fail('Response data property is missing');\r",
+							"            }\r",
+							"        } else {\r",
+							"            // Check if 'data' property exists before asserting its type and emptiness\r",
+							"            if ('data' in response) {\r",
+							"                pm.expect(response.data).to.be.an('array').and.empty;\r",
+							"            } else {\r",
+							"                pm.expect.fail('Response data property is missing');\r",
+							"            }\r",
+							"        }\r",
+							"    } else {\r",
+							"        pm.expect.fail('Response status property is missing');\r",
+							"    }\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -223,12 +771,68 @@
 		},
 		{
 			"name": "http://localhost/php_rest_api/null_operation.php",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.sendRequest({\r",
+							"    url: 'http://localhost/php_rest_api/null_operation.php', // Replace 'your_api_endpoint' with the actual endpoint URL\r",
+							"    method: 'PUT',\r",
+							"    header: {\r",
+							"        'Content-Type': 'application/json'\r",
+							"    },\r",
+							"    body: {\r",
+							"        mode: 'raw',\r",
+							"        raw: JSON.stringify({\r",
+							"            sid: 7, // Replace with the ID of the row you want to update\r",
+							"            column_names: 'city', // Replace with the column names you want to update\r",
+							"            new_values: '' // Replace with the new values for the specified columns\r",
+							"        })\r",
+							"    }\r",
+							"}, function (err, response) {\r",
+							"    if (err) {\r",
+							"        console.error(err);\r",
+							"    } else {\r",
+							"        console.log(response.json());\r",
+							"    }\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Response Body Validation', function () {\r",
+							"    pm.expect(pm.response.json()).to.be.an('object');\r",
+							"    pm.expect(pm.response.json()).to.have.property('message').that.is.a('string');\r",
+							"    pm.expect(pm.response.json()).to.have.property('status').that.is.a('boolean');\r",
+							"});\r",
+							"\r",
+							"pm.test('Status Code is 200', function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test('Record updated successfully', function () {\r",
+							"    pm.expect(pm.response.json().status).to.equal(true);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "PUT",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"sid\":4,\r\n    \"column_names\":\"last_name\",\r\n    \"new_values\":\"patel\"\r\n}",
+					"raw": "{\r\n    \"sid\":7,\r\n    \"column_names\":\"city\",\r\n    \"new_values\":\" \"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -251,6 +855,28 @@
 		},
 		{
 			"name": "http://localhost/php_rest_api/image_upload.php",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -260,7 +886,7 @@
 						{
 							"key": "file",
 							"type": "file",
-							"src": "/C:/Users/ABCD/Pictures/Screenshots/Screenshot (301).png"
+							"src": "/C:/Users/ABCD/OneDrive/Pictures/2.png"
 						}
 					]
 				},
@@ -280,6 +906,56 @@
 		},
 		{
 			"name": "http://localhost/php_rest_api/findparticular_record.php?first_letter=p",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Define the first letter you want to filter by\r",
+							"const firstLetter = 'A';\r",
+							"\r",
+							"// Set the query parameters\r",
+							"pm.request.url.query.add({\r",
+							"    key: 'first_letter',\r",
+							"    value: firstLetter\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const response = pm.response.json();\r",
+							"\r",
+							"pm.test('Response Body Validation', function () {\r",
+							"    pm.expect(response).to.be.an('object');\r",
+							"    pm.expect(response).to.have.property('message').that.is.a('string');\r",
+							"    pm.expect(response).to.have.property('status').that.is.a('boolean');\r",
+							"    pm.expect(response).to.have.property('data').that.is.an('array');\r",
+							"});\r",
+							"\r",
+							"pm.test('Status Code is 200', function () {\r",
+							"    pm.expect(pm.response.code).to.equal(200);\r",
+							"});\r",
+							"\r",
+							"pm.test('Data Contains Records', function () {\r",
+							"    if (response.status === true) {\r",
+							"        pm.expect(response.data).to.be.an('array').and.not.empty;\r",
+							"    } else {\r",
+							"        pm.expect(response.data).to.be.an('array').and.empty;\r",
+							"    }\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
